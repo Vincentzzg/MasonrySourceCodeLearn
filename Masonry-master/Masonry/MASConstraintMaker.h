@@ -47,6 +47,8 @@ typedef NS_OPTIONS(NSInteger, MASAttribute) {
  */
 @interface MASConstraintMaker : NSObject
 
+// 下面的属性返回一个新的MASViewConstraint对象
+// MASViewConstraint对象的firstViewAttribute使用maker绑定的view和相应的MASViewAttribute创建
 /**
  *	The following properties return a new MASViewConstraint
  *  with the first item set to the makers associated view and the appropriate MASViewAttribute

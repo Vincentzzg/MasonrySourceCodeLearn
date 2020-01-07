@@ -15,6 +15,8 @@
 
 @interface MASConstraintMaker () <MASConstraintDelegate>
 
+// view这里是弱引用
+// 如果view不存在了，maker也没有存在的必要
 @property (nonatomic, weak) MAS_VIEW *view;
 @property (nonatomic, strong) NSMutableArray *constraints;
 
@@ -59,18 +61,25 @@
 - (MASConstraint *)constraint:(MASConstraint *)constraint addConstraintWithLayoutAttribute:(NSLayoutAttribute)layoutAttribute {
     MASViewAttribute *viewAttribute = [[MASViewAttribute alloc] initWithView:self.view layoutAttribute:layoutAttribute];
     MASViewConstraint *newConstraint = [[MASViewConstraint alloc] initWithFirstViewAttribute:viewAttribute];
+    
+    // 一句话中同时设置多个约束的时候，会走到这里生成一个合并的约束
     if ([constraint isKindOfClass:MASViewConstraint.class]) {
         //replace with composite constraint
         NSArray *children = @[constraint, newConstraint];
+        
         MASCompositeConstraint *compositeConstraint = [[MASCompositeConstraint alloc] initWithChildren:children];
+        
         compositeConstraint.delegate = self;
         [self constraint:constraint shouldBeReplacedWithConstraint:compositeConstraint];
         return compositeConstraint;
     }
+    
     if (!constraint) {
         newConstraint.delegate = self;
         [self.constraints addObject:newConstraint];
     }
+    
+    // 返回一个MASContraint实例
     return newConstraint;
 }
 

@@ -17,11 +17,13 @@
  */
 @interface MASViewConstraint : MASConstraint <NSCopying>
 
+// 描述当前view的attribute
 /**
  *	First item/view and first attribute of the NSLayoutConstraint
  */
 @property (nonatomic, strong, readonly) MASViewAttribute *firstViewAttribute;
 
+// 描述约束关系中的第二个view的attribute
 /**
  *	Second item/view and second attribute of the NSLayoutConstraint
  */

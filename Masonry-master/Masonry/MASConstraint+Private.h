@@ -37,6 +37,8 @@
 
 @interface MASConstraint (Abstract)
 
+// 抽象方法 由子类来实现
+
 /**
  *	Sets the constraint relation to given NSLayoutRelation
  *  returns a block which accepts one of the following:

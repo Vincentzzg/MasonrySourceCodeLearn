@@ -225,6 +225,7 @@
 
 @end
 
+//
 
 /**
  *  Convenience auto-boxing macros for MASConstraint methods.
@@ -252,6 +253,8 @@
 
 @interface MASConstraint (AutoboxingSupport)
 
+// 对应关系方法的别名
+// 是宏能够自动补全
 /**
  *  Aliases to corresponding relation methods (for shorthand macros)
  *  Also needed to aid autocompletion

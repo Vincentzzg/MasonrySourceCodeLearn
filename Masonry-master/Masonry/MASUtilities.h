@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-
+// 支持iOS、tvOS的代码
 #if TARGET_OS_IPHONE || TARGET_OS_TV
 
     #import <UIKit/UIKit.h>
@@ -24,6 +24,7 @@
     static const MASLayoutPriority MASLayoutPriorityDefaultLow = UILayoutPriorityDefaultLow;
     static const MASLayoutPriority MASLayoutPriorityFittingSizeLevel = UILayoutPriorityFittingSizeLevel;
 
+// 支持macOS的代码
 #elif TARGET_OS_MAC
 
     #import <AppKit/AppKit.h>
@@ -68,6 +69,9 @@
  */
 #define MAS_NSUINT_BIT (CHAR_BIT * sizeof(NSUInteger))
 #define MAS_NSUINTROTATE(val, howmuch) ((((NSUInteger)val) << howmuch) | (((NSUInteger)val) >> (MAS_NSUINT_BIT - howmuch)))
+
+
+// 装箱函数：作用是把传入的纯量或者结构体值，封装进NSValue
 
 /**
  *  Given a scalar or struct value, wraps it in NSValue

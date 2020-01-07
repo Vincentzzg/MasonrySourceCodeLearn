@@ -40,7 +40,10 @@ static char kInstalledConstraintsKey;
 @property (nonatomic, strong, readwrite) MASViewAttribute *secondViewAttribute;
 @property (nonatomic, weak) MAS_VIEW *installedView;
 @property (nonatomic, weak) MASLayoutConstraint *layoutConstraint;
+
+// 描述firstViewAttribute和secondViewAttribute之间的关系
 @property (nonatomic, assign) NSLayoutRelation layoutRelation;
+
 @property (nonatomic, assign) MASLayoutPriority layoutPriority;
 @property (nonatomic, assign) CGFloat layoutMultiplier;
 @property (nonatomic, assign) CGFloat layoutConstant;
@@ -329,6 +332,8 @@ static char kInstalledConstraintsKey;
         secondLayoutAttribute = firstLayoutAttribute;
     }
     
+    // 调用系统API生成一个layoutConstraint对象
+    // MASLayoutConstraint继承自NSLayoutConstraint
     MASLayoutConstraint *layoutConstraint
         = [MASLayoutConstraint constraintWithItem:firstLayoutItem
                                         attribute:firstLayoutAttribute
@@ -342,6 +347,7 @@ static char kInstalledConstraintsKey;
     layoutConstraint.mas_key = self.mas_key;
     
     if (self.secondViewAttribute.view) {
+        // 获取两个view最近的父view
         MAS_VIEW *closestCommonSuperview = [self.firstViewAttribute.view mas_closestCommonSuperview:self.secondViewAttribute.view];
         NSAssert(closestCommonSuperview,
                  @"couldn't find a common superview for %@ and %@",
@@ -359,11 +365,14 @@ static char kInstalledConstraintsKey;
         existingConstraint = [self layoutConstraintSimilarTo:layoutConstraint];
     }
     if (existingConstraint) {
+        // 更新约束
         // just update the constant
         existingConstraint.constant = layoutConstraint.constant;
         self.layoutConstraint = existingConstraint;
     } else {
+        // 添加约束
         [self.installedView addConstraint:layoutConstraint];
+        
         self.layoutConstraint = layoutConstraint;
         [firstLayoutItem.mas_installedConstraints addObject:self];
     }

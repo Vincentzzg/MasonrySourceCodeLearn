@@ -11,13 +11,25 @@
 
 @implementation MAS_VIEW (MASAdditions)
 
+/// 设置约束：第一次设置约束时使用的方法
+/// 返回数组是新添加的约束数组
+/// 重复调用会产生约束冲突
 - (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *))block {
+    // 自己添加约束，关闭这个属性（自动调整大小蒙板转换成约束）
     self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // 实例化一个maker
     MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    // 调用传入的block，把maker作为参数带入
     block(constraintMaker);
+    
+    // 调用install方法，把约束添加到view上
+    // 会调用所有添加到maker上的约束的install方法
     return [constraintMaker install];
 }
 
+/// 更新约束
+/// 返回数组是新添加的约束数组
 - (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
@@ -26,6 +38,9 @@
     return [constraintMaker install];
 }
 
+/// 重新设置约束
+/// 返回数组是新添加的约束数组
+/// 会移除以前设置的约束
 - (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];

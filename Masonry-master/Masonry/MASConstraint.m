@@ -266,6 +266,7 @@
 
 - (MASConstraint * (^)(MASLayoutPriority priority))priority { MASMethodNotImplemented(); }
 
+/// OC中不支持抽象方法，所以这里父类实现里面用MASMethodNotImplemented这个宏在错误调用时抛出异常
 - (MASConstraint * (^)(id, NSLayoutRelation))equalToWithRelation { MASMethodNotImplemented(); }
 
 - (MASConstraint * (^)(id key))key { MASMethodNotImplemented(); }
