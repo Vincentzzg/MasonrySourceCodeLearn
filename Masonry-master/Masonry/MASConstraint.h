@@ -253,8 +253,8 @@
 
 @interface MASConstraint (AutoboxingSupport)
 
-// 对应关系方法的别名
-// 是宏能够自动补全
+// 对应关系方法的别名(用于速记宏)
+// 还需要辅助自动补全
 /**
  *  Aliases to corresponding relation methods (for shorthand macros)
  *  Also needed to aid autocompletion
