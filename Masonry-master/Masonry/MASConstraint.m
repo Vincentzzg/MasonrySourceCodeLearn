@@ -167,6 +167,7 @@
 
 #pragma mark - Chaining
 
+// __unused关键字意味着变量和函数可能不被使用，防止在不使用时编译器报警告
 - (MASConstraint *)addConstraintWithLayoutAttribute:(NSLayoutAttribute __unused)layoutAttribute {
     MASMethodNotImplemented();
 }

@@ -78,6 +78,9 @@
  *  Given a scalar or struct value, wraps it in NSValue
  *  Based on EXPObjectify: https://github.com/specta/expecta
  */
+// inline声明代表这是个内联函数
+// 编译器可能会（不一定，依赖具体实现）用内联代码替换函数调用
+// 一般不在头文件中放可执行代码，内联函数是个特例
 static inline id _MASBoxValue(const char *type, ...) {
     va_list v;
     va_start(v, type);
