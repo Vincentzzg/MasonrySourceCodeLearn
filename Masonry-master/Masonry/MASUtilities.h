@@ -72,6 +72,7 @@
 
 
 // 装箱函数：作用是把传入的纯量或者结构体值，封装进NSValue
+// 这个函数接收数量可变的参数，参数声明“(const char *type, ...)”
 
 /**
  *  Given a scalar or struct value, wraps it in NSValue
